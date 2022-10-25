@@ -3,5 +3,8 @@
 import { add } from './demo01/add';
 import { minus } from './demo01/minus';
 
-console.log(add(1, 1));
-console.log(minus(5, 1));
+
+const div = document.createElement('div');
+div.innerText = `result => ${add(1, 1)}, ${minus(5, 1)}`;
+
+document.body.appendChild(div);
