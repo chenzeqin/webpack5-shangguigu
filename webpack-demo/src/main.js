@@ -8,6 +8,8 @@ import './demo03/index.less'
 /* demo04: 处理sass资源 */
 import './demo04/index.sass'
 import './demo04/index.scss'
+/* demo05: 处理stylus资源 */
+import './demo05/index.styl'
 
 
 const div = document.createElement('div');
