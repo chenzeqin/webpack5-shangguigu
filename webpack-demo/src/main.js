@@ -5,6 +5,9 @@ import { minus } from './demo01/minus';
 import './demo02/index.css'
 /* demo03: 处理less资源 */
 import './demo03/index.less'
+/* demo04: 处理sass资源 */
+import './demo04/index.sass'
+import './demo04/index.scss'
 
 
 const div = document.createElement('div');

@@ -31,6 +31,17 @@ module.exports = {
           'less-loader', //将less文件编译成css
         ],
       },
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+           // 将 JS 字符串生成为 style 节点
+           'style-loader',
+           // 将 CSS 转化成 CommonJS 模块
+           'css-loader',
+           // 将 Sass 编译成 CSS
+           'sass-loader',
+        ],
+      },
     ],
   },
   // 插件
