@@ -3,6 +3,8 @@ import { add } from './demo01/add';
 import { minus } from './demo01/minus';
 /* demo02: 处理css资源 */
 import './demo02/index.css'
+/* demo03: 处理less资源 */
+import './demo03/index.less'
 
 
 const div = document.createElement('div');
