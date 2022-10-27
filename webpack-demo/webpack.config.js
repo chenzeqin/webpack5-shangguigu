@@ -13,7 +13,16 @@ module.exports = {
   // 加载器
   module: {
     // loader配置
-    rules: [],
+    rules: [
+      {
+        test: /\.css$/, // 只检查.css文件
+        // 执行顺序： 从右到左（从下到上）
+        use: [
+          'style-loader',  // 通过创建style标签，将js中的css添加到html文件中
+           'css-loader', // 将css资源编译成commonjs的模块到js中
+          ],
+      },
+    ],
   },
   // 插件
   plugins: [
