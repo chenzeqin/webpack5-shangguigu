@@ -10,6 +10,8 @@ import './demo04/index.sass'
 import './demo04/index.scss'
 /* demo05: 处理stylus资源 */
 import './demo05/index.styl'
+/* demo06 处理图片资源 */
+import './demo06/index.scss'
 
 
 const div = document.createElement('div');

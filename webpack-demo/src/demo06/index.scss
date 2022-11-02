@@ -1,0 +1,37 @@
+.assets {
+  display: flex;
+  justify-items: center;
+}
+
+@mixin box {
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 10px;
+}
+
+.box6 {
+  @include box();
+  background-image: url('../assets/image01.png');
+}
+.box7 {
+  @include box();
+  background-image: url('../assets/image02.jfif');
+}
+.box8 {
+  @include box();
+  background-image: url('../assets/image03.jpg');
+}
+.box9 {
+  @include box();
+  background-image: url('../assets/image04.gif');
+}
+.box10 {
+  @include box();
+  background-image: url('../assets//image05.jpg');
+}
+.box11 {
+  @include box();
+  background-image: url('../assets//image06.gif');
+}
