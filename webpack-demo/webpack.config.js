@@ -34,12 +34,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-           // 将 JS 字符串生成为 style 节点
-           'style-loader',
-           // 将 CSS 转化成 CommonJS 模块
-           'css-loader',
-           // 将 Sass 编译成 CSS
-           'sass-loader',
+          // 将 JS 字符串生成为 style 节点
+          'style-loader',
+          // 将 CSS 转化成 CommonJS 模块
+          'css-loader',
+          // 将 Sass 编译成 CSS
+          'sass-loader',
         ],
       },
       {
@@ -49,6 +49,17 @@ module.exports = {
           'css-loader',
           'stylus-loader', //将stylus文件编译成css
         ],
+      },
+      // 
+      {
+        test: /\.(jpe?g|png|gif|webp|svg)$/,
+        type: 'asset',
+        parser: {
+          // 小于10kb，转成base64
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 4kb
+          },
+        },
       },
     ],
   },
