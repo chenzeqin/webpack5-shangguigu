@@ -256,7 +256,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _dem
   \*********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"9770fe1eb49b35e25a74.jfif\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image02.jfif?");
+eval("module.exports = __webpack_require__.p + \"static/images/image02-9770fe1eb4.jfif\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image02.jfif?");
 
 /***/ }),
 
@@ -266,7 +266,7 @@ eval("module.exports = __webpack_require__.p + \"9770fe1eb49b35e25a74.jfif\";\n\
   \********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"f62c202113521bd9a1e6.png\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image01.png?");
+eval("module.exports = __webpack_require__.p + \"static/images/image01-f62c202113.png\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image01.png?");
 
 /***/ }),
 
@@ -276,7 +276,7 @@ eval("module.exports = __webpack_require__.p + \"f62c202113521bd9a1e6.png\";\n\n
   \********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"08032d594dc8cc20d1f2.jpg\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image03.jpg?");
+eval("module.exports = __webpack_require__.p + \"static/images/image03-08032d594d.jpg\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image03.jpg?");
 
 /***/ }),
 
@@ -296,7 +296,7 @@ eval("module.exports = \"data:image/gif;base64,R0lGODlhNgAzAPYdADc4N0lJR1dYV3Fxb
   \********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"bc2bc08644c7ac835365.jpg\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image05.jpg?");
+eval("module.exports = __webpack_require__.p + \"static/images/image05-bc2bc08644.jpg\";\n\n//# sourceURL=webpack://webpack-demo/./src/assets/image05.jpg?");
 
 /***/ }),
 
@@ -409,7 +409,7 @@ eval("module.exports = \"data:image/gif;base64,R0lGODlhQgBCAHcAACH/C05FVFNDQVBFM
 /******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
 /******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
 /******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 		__webpack_require__.p = scriptUrl + "../../";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */

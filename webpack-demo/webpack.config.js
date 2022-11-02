@@ -8,7 +8,8 @@ module.exports = {
   // 输出
   output: {
     path: path.resolve(__dirname, 'dist'), // 绝对路径
-    filename: 'index.js', // 注意不是驼峰
+    filename: 'static/js/index.js', // 注意不是驼峰
+    clean: true,
   },
   // 加载器
   module: {
@@ -50,15 +51,27 @@ module.exports = {
           'stylus-loader', //将stylus文件编译成css
         ],
       },
-      // 
+      // 处理图片资源（默认可不配置）
       {
         test: /\.(jpe?g|png|gif|webp|svg)$/,
         type: 'asset',
+        // 输出到指定目录
+        generator: {
+          filename: 'static/images/[name]-[hash:10][ext][query]',
+        },
         parser: {
           // 小于10kb，转成base64
           dataUrlCondition: {
             maxSize: 10 * 1024, // 4kb
           },
+        },
+      },
+      {
+        test: /\.(jfif)$/,
+        type: 'asset/resource',
+        // 输出到指定目录
+        generator: {
+          filename: 'static/images/[name]-[hash:10][ext][query]',
         },
       },
     ],
