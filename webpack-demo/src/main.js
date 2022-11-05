@@ -15,6 +15,12 @@ import './demo06/index.scss'
 /* demo07 处理图标文件 */
 import './assets/fonts/iconfont.css'
 
+// eslint
+// rules: {
+//   "no-var": 'error' // 禁止使用var声明变量
+// },
+// var a = 123
+
 
 const div = document.createElement('div');
 div.innerText = `result => ${add(1, 1)}, ${minus(5, 1)}`;

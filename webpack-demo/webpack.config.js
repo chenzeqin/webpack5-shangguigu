@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 /*
   对应5个核心概念
 */
@@ -86,7 +87,9 @@ module.exports = {
   },
   // 插件
   plugins: [
-    // plugin的配置
+    new ESLintPlugin({
+      context: path.resolve(__dirname, 'src'),
+    }),
   ],
   // 模式
   mode: 'development',
