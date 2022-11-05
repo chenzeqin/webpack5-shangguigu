@@ -83,6 +83,13 @@ module.exports = {
           filename: 'static/fonts/[name]-[hash:10][ext][query]',
         },
       },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        // 可以在这里写babel配置
+        // options:{}
+      },
     ],
   },
   // 插件

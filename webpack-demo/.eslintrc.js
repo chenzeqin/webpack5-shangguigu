@@ -13,6 +13,6 @@ module.exports = {
   // "off" | "warn" | "error" 或者 0 | 1 | 2
   // 自定义rules规则优先级大于继承的规则
   rules: {
-    "no-var": 'error'
+    "no-var": 'error' // 禁止使用var声明变量
   },
 };

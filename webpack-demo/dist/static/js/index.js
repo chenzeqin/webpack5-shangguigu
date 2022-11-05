@@ -10,6 +10,46 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/demo01/add.js":
+/*!***************************!*\
+  !*** ./src/demo01/add.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"add\": () => (/* binding */ add)\n/* harmony export */ });\nfunction add(a, b) {\n  return a + b;\n}\n\n//# sourceURL=webpack://webpack-demo/./src/demo01/add.js?");
+
+/***/ }),
+
+/***/ "./src/demo01/minus.js":
+/*!*****************************!*\
+  !*** ./src/demo01/minus.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"minus\": () => (/* binding */ minus)\n/* harmony export */ });\nfunction minus(a, b) {\n  return a - b;\n}\n\n//# sourceURL=webpack://webpack-demo/./src/demo01/minus.js?");
+
+/***/ }),
+
+/***/ "./src/demo07/index.js":
+/*!*****************************!*\
+  !*** ./src/demo07/index.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"sum\": () => (/* binding */ sum)\n/* harmony export */ });\n// 箭头函数\nvar sum = function sum() {\n  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {\n    args[_key] = arguments[_key];\n  }\n  return args.reduce(function (prev, current) {\n    return prev + current;\n  }, 0);\n};\n\n//# sourceURL=webpack://webpack-demo/./src/demo07/index.js?");
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _demo01_add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo01/add */ \"./src/demo01/add.js\");\n/* harmony import */ var _demo01_minus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo01/minus */ \"./src/demo01/minus.js\");\n/* harmony import */ var _demo02_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo02/index.css */ \"./src/demo02/index.css\");\n/* harmony import */ var _demo03_index_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo03/index.less */ \"./src/demo03/index.less\");\n/* harmony import */ var _demo04_index_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./demo04/index.sass */ \"./src/demo04/index.sass\");\n/* harmony import */ var _demo04_index_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./demo04/index.scss */ \"./src/demo04/index.scss\");\n/* harmony import */ var _demo05_index_styl__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo05/index.styl */ \"./src/demo05/index.styl\");\n/* harmony import */ var _demo06_index_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./demo06/index.scss */ \"./src/demo06/index.scss\");\n/* harmony import */ var _assets_fonts_iconfont_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./assets/fonts/iconfont.css */ \"./src/assets/fonts/iconfont.css\");\n/* harmony import */ var _demo07_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./demo07/index */ \"./src/demo07/index.js\");\n/* demo01: 基本使用，引入多个js文件 */\n\n\n/* demo02: 处理css资源 */\n\n/* demo03: 处理less资源 */\n\n/* demo04: 处理sass资源 */\n\n\n/* demo05: 处理stylus资源 */\n\n/* demo06 处理图片资源 */\n\n/* demo07 处理图标文件 */\n\n/* babel */\n\nconsole.log((0,_demo07_index__WEBPACK_IMPORTED_MODULE_9__.sum)(1, 2, 3, 4));\n\n// eslint\n// rules: {\n//   \"no-var\": 'error' // 禁止使用var声明变量\n// },\n// var a = 123\n\nvar div = document.createElement('div');\ndiv.innerText = \"result => \".concat((0,_demo01_add__WEBPACK_IMPORTED_MODULE_0__.add)(1, 1), \", \").concat((0,_demo01_minus__WEBPACK_IMPORTED_MODULE_1__.minus)(5, 1));\ndocument.body.appendChild(div);\n\n//# sourceURL=webpack://webpack-demo/./src/main.js?");
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/demo03/index.less":
 /*!************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/demo03/index.less ***!
@@ -237,36 +277,6 @@ eval("\n\n/* istanbul ignore next  */\nfunction apply(styleElement, options, obj
 /***/ ((module) => {
 
 eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElement) {\n  if (styleElement.styleSheet) {\n    styleElement.styleSheet.cssText = css;\n  } else {\n    while (styleElement.firstChild) {\n      styleElement.removeChild(styleElement.firstChild);\n    }\n\n    styleElement.appendChild(document.createTextNode(css));\n  }\n}\n\nmodule.exports = styleTagTransform;\n\n//# sourceURL=webpack://webpack-demo/./node_modules/style-loader/dist/runtime/styleTagTransform.js?");
-
-/***/ }),
-
-/***/ "./src/demo01/add.js":
-/*!***************************!*\
-  !*** ./src/demo01/add.js ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"add\": () => (/* binding */ add)\n/* harmony export */ });\n\r\nfunction add(a, b) {\r\n  return a + b;\r\n}\r\n\n\n//# sourceURL=webpack://webpack-demo/./src/demo01/add.js?");
-
-/***/ }),
-
-/***/ "./src/demo01/minus.js":
-/*!*****************************!*\
-  !*** ./src/demo01/minus.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"minus\": () => (/* binding */ minus)\n/* harmony export */ });\nfunction minus(a, b) {\r\n  return a - b;\r\n}\r\n\n\n//# sourceURL=webpack://webpack-demo/./src/demo01/minus.js?");
-
-/***/ }),
-
-/***/ "./src/main.js":
-/*!*********************!*\
-  !*** ./src/main.js ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _demo01_add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo01/add */ \"./src/demo01/add.js\");\n/* harmony import */ var _demo01_minus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo01/minus */ \"./src/demo01/minus.js\");\n/* harmony import */ var _demo02_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo02/index.css */ \"./src/demo02/index.css\");\n/* harmony import */ var _demo03_index_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo03/index.less */ \"./src/demo03/index.less\");\n/* harmony import */ var _demo04_index_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./demo04/index.sass */ \"./src/demo04/index.sass\");\n/* harmony import */ var _demo04_index_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./demo04/index.scss */ \"./src/demo04/index.scss\");\n/* harmony import */ var _demo05_index_styl__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo05/index.styl */ \"./src/demo05/index.styl\");\n/* harmony import */ var _demo06_index_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./demo06/index.scss */ \"./src/demo06/index.scss\");\n/* harmony import */ var _assets_fonts_iconfont_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./assets/fonts/iconfont.css */ \"./src/assets/fonts/iconfont.css\");\n/* demo01: 基本使用，引入多个js文件 */\r\n\r\n\r\n/* demo02: 处理css资源 */\r\n\r\n/* demo03: 处理less资源 */\r\n\r\n/* demo04: 处理sass资源 */\r\n\r\n\r\n/* demo05: 处理stylus资源 */\r\n\r\n/* demo06 处理图片资源 */\r\n\r\n/* demo07 处理图标文件 */\r\n\r\n\r\n\r\nconst div = document.createElement('div');\r\ndiv.innerText = `result => ${(0,_demo01_add__WEBPACK_IMPORTED_MODULE_0__.add)(1, 1)}, ${(0,_demo01_minus__WEBPACK_IMPORTED_MODULE_1__.minus)(5, 1)}`;\r\n\r\ndocument.body.appendChild(div);\r\n\n\n//# sourceURL=webpack://webpack-demo/./src/main.js?");
 
 /***/ }),
 
