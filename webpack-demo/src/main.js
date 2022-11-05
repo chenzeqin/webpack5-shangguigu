@@ -12,6 +12,8 @@ import './demo04/index.scss'
 import './demo05/index.styl'
 /* demo06 处理图片资源 */
 import './demo06/index.scss'
+/* demo07 处理图标文件 */
+import './assets/fonts/iconfont.css'
 
 
 const div = document.createElement('div');

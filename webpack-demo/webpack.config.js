@@ -1,5 +1,5 @@
 const path = require('path');
-/* 
+/*
   对应5个核心概念
 */
 module.exports = {
@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // 绝对路径
     filename: 'static/js/index.js', // 注意不是驼峰
     clean: true, // 自动清空上一次打包内容
+  },
   // 加载器
   module: {
     // loader配置
@@ -71,6 +72,14 @@ module.exports = {
         // 输出到指定目录
         generator: {
           filename: 'static/images/[name]-[hash:10][ext][query]',
+        },
+      },
+      {
+        test: /\.(ttf|woff2?)$/,
+        type: 'asset/resource',
+        // 输出到指定目录
+        generator: {
+          filename: 'static/fonts/[name]-[hash:10][ext][query]',
         },
       },
     ],

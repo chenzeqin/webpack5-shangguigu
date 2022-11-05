@@ -1,0 +1,37 @@
+{
+  "id": "669731",
+  "name": "优购",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2674480",
+      "name": "对勾",
+      "font_class": "duigou",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "2674482",
+      "name": "说明",
+      "font_class": "shuoming",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "2045152",
+      "name": "addpeople_fill",
+      "font_class": "addpeople_fill",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    },
+    {
+      "icon_id": "2045153",
+      "name": "addpeople",
+      "font_class": "addpeople",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    }
+  ]
+}
