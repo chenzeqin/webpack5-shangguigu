@@ -90,7 +90,8 @@ module.exports = {
           {
             test: /\.js$/,
             loader: 'babel-loader',
-            exclude: /node_modules/,
+            // exclude: /node_modules/, // 排除node_modules代码不编译
+            include: path.resolve(__dirname, '../src'), // 也可以用包含(不能同时使用)
             // 可以在这里写babel配置
             // options:{}
           },
@@ -102,6 +103,7 @@ module.exports = {
   plugins: [
     new ESLintPlugin({
       context: path.resolve(__dirname, '../src'),
+      exclude: 'node_modules', // 默认值
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
