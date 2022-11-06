@@ -1,7 +1,7 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 /*
   对应5个核心概念
 */
@@ -24,6 +24,20 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader', // 将css资源编译成commonjs的模块到js中
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    // 其他选项
+                    {},
+                  ],
+                ],
+              },
+            },
+          },
         ],
       },
       {
@@ -32,6 +46,20 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    // 其他选项
+                    {},
+                  ],
+                ],
+              },
+            },
+          },
           'less-loader', //将less文件编译成css
         ],
       },
@@ -42,8 +70,22 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           // 将 CSS 转化成 CommonJS 模块
           'css-loader',
-          // 将 Sass 编译成 CSS
-          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    // 其他选项
+                    {},
+                  ],
+                ],
+              },
+            },
+          },
+           // 将 Sass 编译成 CSS
+           'sass-loader',
         ],
       },
       {
@@ -51,6 +93,20 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    // 其他选项
+                    {},
+                  ],
+                ],
+              },
+            },
+          },
           'stylus-loader', //将stylus文件编译成css
         ],
       },
@@ -105,7 +161,7 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'static/main.css', // 注意不是驼峰
-    })
+    }),
   ],
   // 开发服务器(生产环境不需要)
   // devServer: {
