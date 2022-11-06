@@ -1,7 +1,6 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { getStyleLoader } = require('./utils');
 
 /*
   对应5个核心概念
@@ -22,20 +21,38 @@ module.exports = {
       {
         test: /\.css$/, // 只检查.css文件
         // 执行顺序： 从右到左（从下到上）
-        use: getStyleLoader(),
+        use: [
+          'style-loader', // 通过创建style标签，将js中的css添加到html文件中
+          'css-loader', // 将css资源编译成commonjs的模块到js中
+        ],
       },
       {
         test: /\.less$/,
         // loader:'less-loader',只能配置一个loader
-        use: getStyleLoader('less-loader'),
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader', //将less文件编译成css
+        ],
       },
       {
         test: /\.s[ac]ss$/,
-        use: getStyleLoader('sass-loader'),
+        use: [
+          // 将 JS 字符串生成为 style 节点
+          'style-loader',
+          // 将 CSS 转化成 CommonJS 模块
+          'css-loader',
+          // 将 Sass 编译成 CSS
+          'sass-loader',
+        ],
       },
       {
         test: /\.styl$/,
-        use: getStyleLoader('stylus-loader'),
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader', //将stylus文件编译成css
+        ],
       },
       // 处理图片资源（默认可不配置）
       {
