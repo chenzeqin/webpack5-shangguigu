@@ -17,6 +17,10 @@ import './assets/fonts/iconfont.css';
 /* babel */
 import { sum } from './demo07/index';
 console.log(sum(1, 2, 3, 4, 20));
+/* demo08 测试tree shaking */
+// 乘法没有引用到，不会打包
+import { division } from './demo08/math';
+console.log(division);
 
 // eslint
 // rules: {
@@ -30,5 +34,5 @@ div.innerText = `result => ${add(1, 1)}, ${minus(5, 1)}`;
 document.body.appendChild(div);
 // 判断是否支持HMR功能
 if (module.hot) {
-  module.hot.accept("./demo07/index");
+  module.hot.accept('./demo07/index');
 }
