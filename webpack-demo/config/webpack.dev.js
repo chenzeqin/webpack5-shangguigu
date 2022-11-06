@@ -93,7 +93,10 @@ module.exports = {
             // exclude: /node_modules/, // 排除node_modules代码不编译
             include: path.resolve(__dirname, '../src'), // 也可以用包含(不能同时使用)
             // 可以在这里写babel配置
-            // options:{}
+            options: {
+              cacheDirectory: true, // 开启Babel缓存， 提升构建速度
+              cacheCompression: false, // 关闭缓存文件压缩
+            },
           },
         ],
       },
@@ -104,6 +107,8 @@ module.exports = {
     new ESLintPlugin({
       context: path.resolve(__dirname, '../src'),
       exclude: 'node_modules', // 默认值
+      cache: true, // 开启eslint缓存，提升构建速度
+      cacheLocation: path.resolve(__dirname, '../node_modules/.cache/eslintCache'), // 指定缓存目录
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
