@@ -107,6 +107,6 @@ module.exports = {
   //   port: 3000,
   //   open: true, // 是否自动打开浏览器
   // },
-  // 模式
+  // 开启生产模式，js和html自动压缩
   mode: 'production',
 };
