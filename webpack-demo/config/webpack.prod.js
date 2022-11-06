@@ -3,7 +3,14 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { getStyleLoader } = require('./utils');
+
+// 多进程打包
+const os = require('os');
+// cpu核数
+const threads = os.cpus().length;
+
 /*
   对应5个核心概念
 */
@@ -73,14 +80,24 @@ module.exports = {
           },
           {
             test: /\.js$/,
-            loader: 'babel-loader',
             // exclude: /node_modules/, // 排除node_modules代码不编译
             include: path.resolve(__dirname, '../src'), // 也可以用包含(不能同时使用)
-            // 可以在这里写babel配置
-            options: {
-              cacheDirectory: true, // 开启Babel缓存，提升构建速度
-              cacheCompression: false, // 关闭缓存文件压缩
-            },
+            use: [
+              {
+                loader: 'thread-loader', // 开启多进程
+                options: {
+                  workers: threads, // 数量
+                },
+              },
+              {
+                loader: 'babel-loader',
+                // 可以在这里写babel配置
+                options: {
+                  cacheDirectory: true, // 开启Babel缓存，提升构建速度
+                  cacheCompression: false, // 关闭缓存文件压缩
+                },
+              },
+            ],
           },
         ],
       },
@@ -93,6 +110,7 @@ module.exports = {
       exclude: 'node_modules', // 默认值
       cache: true, // 开启eslint缓存,提升构建速度
       cacheLocation: path.resolve(__dirname, '../node_modules/.cache/eslintCache'), // 指定缓存目录
+      threads, // 开启多进程
     }),
     // 自动引入打包的资源
     new HtmlWebpackPlugin({
@@ -102,13 +120,21 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'static/main.css', // 注意不是驼峰
     }),
+    // css压缩也可以写在这里，webpack5推荐统一写到optimization
+    // new CssMinimizerPlugin(),
   ],
+  // 优化配置项
   optimization: {
+    // 代码压缩
     minimizer: [
       // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
       // `...`,
       // css压缩
       new CssMinimizerPlugin(),
+      // 生产模式会默认开启TerserPlugin，但是我们需要进行其他配置，需要自己写
+      new TerserWebpackPlugin({
+        parallel: threads, // 开启多进程
+      }),
     ],
   },
   // 开发服务器(生产环境不需要)

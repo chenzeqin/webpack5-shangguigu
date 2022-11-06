@@ -1,6 +1,8 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const os = require('os');
+const threads = os.cpus().length;
 
 /*
   对应5个核心概念
@@ -89,14 +91,24 @@ module.exports = {
           },
           {
             test: /\.js$/,
-            loader: 'babel-loader',
             // exclude: /node_modules/, // 排除node_modules代码不编译
             include: path.resolve(__dirname, '../src'), // 也可以用包含(不能同时使用)
-            // 可以在这里写babel配置
-            options: {
-              cacheDirectory: true, // 开启Babel缓存， 提升构建速度
-              cacheCompression: false, // 关闭缓存文件压缩
-            },
+            use: [
+              {
+                loader: 'thread-loader', // 开启多进程
+                options: {
+                  workers: threads, // 数量
+                },
+              },
+              {
+                loader: 'babel-loader',
+                // 可以在这里写babel配置
+                options: {
+                  cacheDirectory: true, // 开启Babel缓存， 提升构建速度
+                  cacheCompression: false, // 关闭缓存文件压缩
+                },
+              },
+            ],
           },
         ],
       },
@@ -109,6 +121,7 @@ module.exports = {
       exclude: 'node_modules', // 默认值
       cache: true, // 开启eslint缓存，提升构建速度
       cacheLocation: path.resolve(__dirname, '../node_modules/.cache/eslintCache'), // 指定缓存目录
+      threads // 开启多线程打包
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
