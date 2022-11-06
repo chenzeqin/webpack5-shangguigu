@@ -1,6 +1,7 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 /*
   对应5个核心概念
 */
@@ -21,7 +22,7 @@ module.exports = {
         test: /\.css$/, // 只检查.css文件
         // 执行顺序： 从右到左（从下到上）
         use: [
-          'style-loader', // 通过创建style标签，将js中的css添加到html文件中
+          MiniCssExtractPlugin.loader,
           'css-loader', // 将css资源编译成commonjs的模块到js中
         ],
       },
@@ -29,7 +30,7 @@ module.exports = {
         test: /\.less$/,
         // loader:'less-loader',只能配置一个loader
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader', //将less文件编译成css
         ],
@@ -38,7 +39,7 @@ module.exports = {
         test: /\.s[ac]ss$/,
         use: [
           // 将 JS 字符串生成为 style 节点
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           // 将 CSS 转化成 CommonJS 模块
           'css-loader',
           // 将 Sass 编译成 CSS
@@ -48,7 +49,7 @@ module.exports = {
       {
         test: /\.styl$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'stylus-loader', //将stylus文件编译成css
         ],
@@ -98,9 +99,13 @@ module.exports = {
     new ESLintPlugin({
       context: path.resolve(__dirname, '../src'),
     }),
+    // 自动引入打包的资源
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
     }),
+    new MiniCssExtractPlugin({
+      filename: 'static/main.css', // 注意不是驼峰
+    })
   ],
   // 开发服务器(生产环境不需要)
   // devServer: {
@@ -109,5 +114,5 @@ module.exports = {
   //   open: true, // 是否自动打开浏览器
   // },
   // 模式
-  mode: 'development',
+  mode: 'production',
 };
