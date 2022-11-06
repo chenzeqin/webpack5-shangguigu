@@ -109,4 +109,5 @@ module.exports = {
   // },
   // 开启生产模式，js和html自动压缩
   mode: 'production',
+  devtool: "source-map", // 开启调试
 };
