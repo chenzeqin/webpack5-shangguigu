@@ -2,6 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { getStyleLoader } = require('./utils');
 /*
   对应5个核心概念
@@ -86,10 +87,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
     }),
+    // css抽取
     new MiniCssExtractPlugin({
       filename: 'static/main.css', // 注意不是驼峰
     }),
+    
   ],
+  optimization: {
+    minimizer: [
+      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
+      // `...`,
+      // css压缩
+      new CssMinimizerPlugin(),
+    ],
+  },
   // 开发服务器(生产环境不需要)
   // devServer: {
   //   host: 'localhost',
