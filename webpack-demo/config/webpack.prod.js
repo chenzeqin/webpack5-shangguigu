@@ -2,7 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { getStyleLoader } = require('./utils');
 /*
   对应5个核心概念
@@ -21,60 +21,65 @@ module.exports = {
     // loader配置
     rules: [
       {
-        test: /\.css$/, // 只检查.css文件
-        // 执行顺序： 从右到左（从下到上）
-        use: getStyleLoader(),
-      },
-      {
-        test: /\.less$/,
-        // loader:'less-loader',只能配置一个loader
-        use: getStyleLoader('less-loader'),
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: getStyleLoader('sass-loader'),
-      },
-      {
-        test: /\.styl$/,
-        use: getStyleLoader('stylus-loader'),
-      },
-      // 处理图片资源（默认可不配置）
-      {
-        test: /\.(jpe?g|png|gif|webp|svg)$/,
-        type: 'asset',
-        // 输出到指定目录
-        generator: {
-          filename: 'static/images/[name]-[hash:10][ext][query]',
-        },
-        parser: {
-          // 小于10kb，转成base64
-          dataUrlCondition: {
-            maxSize: 10 * 1024, // 4kb
+        oneOf: [
+          {
+            test: /\.css$/, // 只检查.css文件
+            // 执行顺序： 从右到左（从下到上）
+            use: getStyleLoader(),
           },
-        },
-      },
-      {
-        test: /\.(jfif)$/,
-        type: 'asset/resource',
-        // 输出到指定目录
-        generator: {
-          filename: 'static/images/[name]-[hash:10][ext][query]',
-        },
-      },
-      {
-        test: /\.(ttf|woff2?)$/,
-        type: 'asset/resource',
-        // 输出到指定目录
-        generator: {
-          filename: 'static/fonts/[name]-[hash:10][ext][query]',
-        },
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        // 可以在这里写babel配置
-        // options:{}
+          {
+            test: /\.less$/,
+            // loader:'less-loader',只能配置一个loader
+            use: getStyleLoader('less-loader'),
+          },
+          {
+            test: /\.s[ac]ss$/,
+            use: getStyleLoader('sass-loader'),
+          },
+          {
+            test: /\.styl$/,
+            use: getStyleLoader('stylus-loader'),
+          },
+          // 处理图片资源（默认可不配置）
+          {
+            test: /\.(jpe?g|png|gif|webp|svg)$/,
+            type: 'asset',
+            // 输出到指定目录
+            generator: {
+              filename: 'static/images/[name]-[hash:10][ext][query]',
+            },
+            parser: {
+              // 小于10kb，转成base64
+              dataUrlCondition: {
+                maxSize: 10 * 1024, // 4kb
+              },
+            },
+          },
+          {
+            test: /\.(jfif)$/,
+            type: 'asset/resource',
+            // 输出到指定目录
+            generator: {
+              filename: 'static/images/[name]-[hash:10][ext][query]',
+            },
+          },
+          {
+            test: /\.(ttf|woff2?)$/,
+            type: 'asset/resource',
+            // 输出到指定目录
+            generator: {
+              filename: 'static/fonts/[name]-[hash:10][ext][query]',
+            },
+          },
+          {
+            test: /\.js$/,
+            loader: 'babel-loader',
+            // exclude: /node_modules/, // 排除node_modules代码不编译
+            include: path.resolve(__dirname, '../src'), // 也可以用包含(不能同时使用)
+            // 可以在这里写babel配置
+            // options:{}
+          },
+        ],
       },
     ],
   },
@@ -82,6 +87,7 @@ module.exports = {
   plugins: [
     new ESLintPlugin({
       context: path.resolve(__dirname, '../src'),
+      exclude: 'node_modules', // 默认值
     }),
     // 自动引入打包的资源
     new HtmlWebpackPlugin({
@@ -91,7 +97,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'static/main.css', // 注意不是驼峰
     }),
-    
   ],
   optimization: {
     minimizer: [
@@ -109,5 +114,5 @@ module.exports = {
   // },
   // 开启生产模式，js和html自动压缩
   mode: 'production',
-  devtool: "source-map", // 开启调试
+  devtool: 'source-map', // 开启调试
 };

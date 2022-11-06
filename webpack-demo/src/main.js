@@ -28,3 +28,7 @@ const div = document.createElement('div');
 div.innerText = `result => ${add(1, 1)}, ${minus(5, 1)}`;
 
 document.body.appendChild(div);
+// 判断是否支持HMR功能
+if (module.hot) {
+  module.hot.accept("./demo07/index");
+}
