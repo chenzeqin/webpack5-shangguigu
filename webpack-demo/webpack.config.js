@@ -99,9 +99,15 @@ module.exports = {
       context: path.resolve(__dirname, 'src'),
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "./public/index.html"),
-    })
+      template: path.resolve(__dirname, './public/index.html'),
+    }),
   ],
+  // 开发服务器
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    open: true, // 是否自动打开浏览器
+  },
   // 模式
   mode: 'development',
 };

@@ -16,7 +16,7 @@ import './demo06/index.scss';
 import './assets/fonts/iconfont.css';
 /* babel */
 import { sum } from './demo07/index';
-console.log(sum(1, 2, 3, 4));
+console.log(sum(1, 2, 3, 4, 20));
 
 // eslint
 // rules: {
