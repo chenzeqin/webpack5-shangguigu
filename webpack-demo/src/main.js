@@ -31,6 +31,14 @@ console.log(division);
 const div = document.createElement('div');
 div.innerText = `result => ${add(1, 1)}, ${minus(5, 1)}`;
 
+new Promise((resolve)=>{
+  setTimeout(()=>{
+    resolve()
+  }, 100)
+})
+
+"foobar".includes("foo")
+
 document.body.appendChild(div);
 // 判断是否支持HMR功能
 if (module.hot) {
