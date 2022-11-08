@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { getStyleLoader } = require('./utils');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 // 多进程打包
 const os = require('os');
@@ -95,7 +96,7 @@ module.exports = {
                 options: {
                   cacheDirectory: true, // 开启Babel缓存，提升构建速度
                   cacheCompression: false, // 关闭缓存文件压缩
-                  plugins: ["@babel/plugin-transform-runtime"], // 减少代码体积
+                  plugins: ['@babel/plugin-transform-runtime'], // 减少代码体积
                 },
               },
             ],
@@ -135,6 +136,34 @@ module.exports = {
       // 生产模式会默认开启TerserPlugin，但是我们需要进行其他配置，需要自己写
       new TerserWebpackPlugin({
         parallel: threads, // 开启多进程
+      }),
+      // 压缩图片,无损压缩配置为例：
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminGenerate,
+          options: {
+            plugins: [
+              ['gifsicle', { interlaced: true }],
+              ['jpegtran', { progressive: true }],
+              ['optipng', { optimizationLevel: 5 }],
+              [
+                'svgo',
+                {
+                  plugins: [
+                    'preset-default',
+                    'prefixIds',
+                    {
+                      name: 'sortAttrs',
+                      params: {
+                        xmlnsOrder: 'alphabetical',
+                      },
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
       }),
     ],
   },
