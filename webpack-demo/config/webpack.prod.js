@@ -6,6 +6,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { getStyleLoader } = require('./utils');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 // 多进程打包
 const os = require('os');
@@ -22,7 +23,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
     filename: 'static/js/[name].js', // 注意不是驼峰
-    chunkFilename: 'static/js/[name].js', // 注意不是驼峰
+    // 统一配置chunk输入
+    chunkFilename: 'static/js/[name].chunk.js',
+    // 统一配置静态资源输出
+    assetModuleFilename: 'static/images/[name]-[hash:10][ext][query]',
     clean: true, // 自动清空上一次打包内容
   },
   // 加载器
@@ -53,10 +57,10 @@ module.exports = {
           {
             test: /\.(jpe?g|png|gif|webp|svg)$/,
             type: 'asset',
-            // 输出到指定目录
-            generator: {
-              filename: 'static/images/[name]-[hash:10][ext][query]',
-            },
+            // 输出到指定目录 统一配置到output.assetModuleFilename
+            // generator: {
+            //   filename: 'static/images/[name]-[hash:10][ext][query]',
+            // },
             parser: {
               // 小于10kb，转成base64
               dataUrlCondition: {
@@ -68,17 +72,17 @@ module.exports = {
             test: /\.(jfif)$/,
             type: 'asset/resource',
             // 输出到指定目录
-            generator: {
-              filename: 'static/images/[name]-[hash:10][ext][query]',
-            },
+            //   generator: {
+            //     filename: 'static/images/[name]-[hash:10][ext][query]',
+            //   },
           },
           {
             test: /\.(ttf|woff2?)$/,
             type: 'asset/resource',
             // 输出到指定目录
-            generator: {
-              filename: 'static/fonts/[name]-[hash:10][ext][query]',
-            },
+            // generator: {
+            //   filename: 'static/fonts/[name]-[hash:10][ext][query]',
+            // },
           },
           {
             test: /\.js$/,
@@ -121,10 +125,17 @@ module.exports = {
     }),
     // css抽取
     new MiniCssExtractPlugin({
-      filename: 'static/main.css', // 注意不是驼峰
+      filename: 'static/[name].css', // 注意不是驼峰
+      chunkFilename: 'static/[name].chunk.css',
     }),
     // css压缩也可以写在这里，webpack5推荐统一写到optimization
     // new CssMinimizerPlugin(),
+    // 配置 preload 或者 prefetch
+    new PreloadWebpackPlugin({
+      // rel: "preload", // preload兼容性更好
+      // as: "script",
+      rel: 'prefetch' // prefetch兼容性更差
+    }),
   ],
   // 优化配置项
   optimization: {
@@ -167,9 +178,9 @@ module.exports = {
         },
       }),
     ],
-    splitChunks:{
-      chunks:'all', // 其他使用默认配置
-    }
+    splitChunks: {
+      chunks: 'all', // 其他使用默认配置
+    },
   },
   // 开发服务器(生产环境不需要)
   // devServer: {

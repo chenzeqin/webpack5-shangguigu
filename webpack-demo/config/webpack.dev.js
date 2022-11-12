@@ -13,7 +13,10 @@ module.exports = {
   // 输出 开发环境没有输出，不需要output
   output: {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
-    filename: 'static/js/index.js', // 注意不是驼峰
+    filename: 'static/js/[name].js', // 注意不是驼峰
+    chunkFilename: 'static/js/[name].js',
+    // 统一配置静态资源输出
+    assetModuleFilename: 'static/images/[name]-[hash:10][ext][query]',
     clean: true, // 自动清空上一次打包内容
   },
   // 加载器
@@ -63,9 +66,9 @@ module.exports = {
             test: /\.(jpe?g|png|gif|webp|svg)$/,
             type: 'asset',
             // 输出到指定目录
-            generator: {
-              filename: 'static/images/[name]-[hash:10][ext][query]',
-            },
+            // generator: {
+            //   filename: 'static/images/[name]-[hash:10][ext][query]',
+            // },
             parser: {
               // 小于10kb，转成base64
               dataUrlCondition: {
@@ -77,17 +80,17 @@ module.exports = {
             test: /\.(jfif)$/,
             type: 'asset/resource',
             // 输出到指定目录
-            generator: {
-              filename: 'static/images/[name]-[hash:10][ext][query]',
-            },
+            // generator: {
+            //   filename: 'static/images/[name]-[hash:10][ext][query]',
+            // },
           },
           {
             test: /\.(ttf|woff2?)$/,
             type: 'asset/resource',
             // 输出到指定目录
-            generator: {
-              filename: 'static/fonts/[name]-[hash:10][ext][query]',
-            },
+            // generator: {
+            //   filename: 'static/fonts/[name]-[hash:10][ext][query]',
+            // },
           },
           {
             test: /\.js$/,
@@ -106,7 +109,7 @@ module.exports = {
                 options: {
                   cacheDirectory: true, // 开启Babel缓存， 提升构建速度
                   cacheCompression: false, // 关闭缓存文件压缩
-                  plugins: ["@babel/plugin-transform-runtime"], // 减少代码体积
+                  plugins: ['@babel/plugin-transform-runtime'], // 减少代码体积
                 },
               },
             ],
@@ -122,7 +125,7 @@ module.exports = {
       exclude: 'node_modules', // 默认值
       cache: true, // 开启eslint缓存，提升构建速度
       cacheLocation: path.resolve(__dirname, '../node_modules/.cache/eslintCache'), // 指定缓存目录
-      threads // 开启多线程打包
+      threads, // 开启多线程打包
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
