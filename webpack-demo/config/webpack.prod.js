@@ -22,6 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
     filename: 'static/js/[name].js', // 注意不是驼峰
+    chunkFilename: 'static/js/[name].js', // 注意不是驼峰
     clean: true, // 自动清空上一次打包内容
   },
   // 加载器

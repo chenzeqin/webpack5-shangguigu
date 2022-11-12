@@ -48,7 +48,8 @@ if (module.hot) {
 // 测试动态引入
 const btn = document.getElementById('btn');
 btn.addEventListener('click', () => {
-  import('./demo08/math').then(({ multi }) => {
+  // 为模块命名
+  import(/* webpackChunkName: "math" */'./demo08/math').then(({ multi }) => {
     console.log('math模块加载成功');
     console.log(multi(2, 3));
   });
