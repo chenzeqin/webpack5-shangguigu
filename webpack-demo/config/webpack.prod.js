@@ -7,6 +7,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 const { getStyleLoader } = require('./utils');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 // 多进程打包
 const os = require('os');
@@ -135,6 +136,12 @@ module.exports = {
       // rel: "preload", // preload兼容性更好
       // as: "script",
       rel: 'prefetch', // prefetch兼容性更差
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // 这些选项帮助快速启用 ServiceWorkers
+      // 不允许遗留任何“旧的” ServiceWorkers
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
   // 优化配置项
