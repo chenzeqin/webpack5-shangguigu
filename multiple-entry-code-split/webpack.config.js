@@ -19,25 +19,33 @@ module.exports = {
   mode: 'production',
   optimization: {
     splitChunks: {
-      chunks:'all', // 激活默认配置，下面默认配置可以不写
+      chunks: 'all', // 激活默认配置，下面默认配置可以不写
       // 默认配置
-      chunks: 'async',
-      minSize: 20000, // 单位bite
-      minRemainingSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 30, // 最大加载30个文件
-      maxInitialRequests: 30,
-      enforceSizeThreshold: 50000, // 强制要求超过50kb,一定会被打包
+      // chunks: 'async',
+      // minSize: 20000, // 单位bite
+      // minRemainingSize: 0,
+      // minChunks: 1,
+      // maxAsyncRequests: 30, // 最大加载30个文件
+      // maxInitialRequests: 30,
+      // enforceSizeThreshold: 50000, // 强制要求超过50kb,一定会被打包
+      // cacheGroups: {
+      //   defaultVendors: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     priority: -10,
+      //     reuseExistingChunk: true,
+      //   },
+      //   default: {
+      //     minChunks: 2,
+      //     priority: -20,
+      //     reuseExistingChunk: true,
+      //   },
+      // },
       cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          reuseExistingChunk: true,
-        },
         default: {
+          minSize: 0, // math.js 比较小，测试时强制打包到一个文件中
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true,
+          reuseExistingChunk: true, // 复用
         },
       },
     },

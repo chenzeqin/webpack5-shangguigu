@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmultiple_entry_code_split=self.webpackChunkmultiple_entry_code_split||[]).push([[229],{229:(e,t,l)=>{l.d(t,{I:()=>s});const s=(...e)=>e.reduce(((e,t)=>e+t),0)}}]);
