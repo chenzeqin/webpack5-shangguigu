@@ -43,7 +43,7 @@ module.exports = {
       cacheGroups: {
         default: {
           minSize: 0, // math.js 比较小，测试时强制打包到一个文件中
-          minChunks: 2,
+          minChunks: 2, // 最少2一个chunk使用到
           priority: -20,
           reuseExistingChunk: true, // 复用
         },
