@@ -134,7 +134,7 @@ module.exports = {
     new PreloadWebpackPlugin({
       // rel: "preload", // preload兼容性更好
       // as: "script",
-      rel: 'prefetch' // prefetch兼容性更差
+      rel: 'prefetch', // prefetch兼容性更差
     }),
   ],
   // 优化配置项
@@ -180,6 +180,9 @@ module.exports = {
     ],
     splitChunks: {
       chunks: 'all', // 其他使用默认配置
+    },
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}.js`,
     },
   },
   // 开发服务器(生产环境不需要)
