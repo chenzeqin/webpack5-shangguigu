@@ -21,7 +21,7 @@ module.exports = {
   // 输出
   output: {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
-    filename: 'static/js/index.js', // 注意不是驼峰
+    filename: 'static/js/[name].js', // 注意不是驼峰
     clean: true, // 自动清空上一次打包内容
   },
   // 加载器
@@ -166,6 +166,9 @@ module.exports = {
         },
       }),
     ],
+    splitChunks:{
+      chunks:'all', // 其他使用默认配置
+    }
   },
   // 开发服务器(生产环境不需要)
   // devServer: {
