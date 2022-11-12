@@ -4,6 +4,8 @@ module.exports = {
     // '@babel/preset-env',
     [
       '@babel/preset-env',
+      // 手动引入 import 'core-js/es/promise'
+      // 配置自动引入需要的polyfill
       {
         // 需要兼容的目标浏览器,
         // 如果有不支持的api，会自动引入指定corejs版本对应的api
