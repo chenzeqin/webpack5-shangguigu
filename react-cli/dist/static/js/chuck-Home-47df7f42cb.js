@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_cli=self.webpackChunkreact_cli||[]).push([[268],{337:function(e,t,n){n.r(t),n.d(t,{default:function(){return a}});var c=n(294),l=n(387);function a(){return c.createElement("div",{className:"home"},"Home",c.createElement(l.Z,null,"hello antd"))}}}]);

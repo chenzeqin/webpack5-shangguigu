@@ -2,7 +2,7 @@
  * @Author: chenzq
  * @Date: 2022-11-20 16:13:30
  * @Description: 把 webpack.dev.js 和 webpack.prod.js 合并为一个配置文件。
- * @LastEditTime: 2022-11-20 17:03:34
+ * @LastEditTime: 2022-11-20 17:50:10
  * @LastEditors: chenzq
  */
 const path = require('path');
@@ -179,16 +179,34 @@ module.exports = {
     ],
     splitChunks: {
       chunks: 'all',
+      cacheGroups: {
+        react: {
+          test:/[\\/]node_modules[\\/]react(.*)/,
+          name:'chunk-react',
+          priority: 40
+        },
+        antd: {
+          test:/[\\/]node_modules[\\/]antd(.*)/,
+          name:'chunk-antd',
+          priority: 30
+        },
+        libs: {
+          test:/[\\/]node_modules[\\/]/,
+          name:'chunk-libs',
+          priority: 20
+        },
+      },
     },
     runtimeChunk: {
       name: (entryPoint) => `runtime~${entryPoint.name}.js`,
     },
   },
-  performance: {
-    hints: 'warning', // 是否开启性能提示警告。 false | "warning" | "error"
-    // 此属性允许 webpack 控制用于计算性能提示的文件。默认函数如下：
-    assetFilter: function (assetFilename) {
-      return /\.(jsx?|tsx?)?/.test(assetFilename);
-    },
-  },
+  performance: false, // 关闭性能分析，可提高构建速度
+  // performance: {
+  //   hints: 'warning', // 是否开启性能提示警告。 false | "warning" | "error"
+  //   // 此属性允许 webpack 控制用于计算性能提示的文件。默认函数如下：
+  //   assetFilter: function (assetFilename) {
+  //     return /\.(jsx?|tsx?)?/.test(assetFilename);
+  //   },
+  // },
 };
