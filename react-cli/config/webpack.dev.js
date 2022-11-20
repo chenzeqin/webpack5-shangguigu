@@ -102,5 +102,7 @@ module.exports = {
     port: 3002,
     hot: true,
     open: true,
+    // 解决history router 页面404问题
+    historyApiFallback: true,
   },
 };
