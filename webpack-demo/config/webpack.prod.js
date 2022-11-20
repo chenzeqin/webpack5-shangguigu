@@ -24,7 +24,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'), // 绝对路径
     filename: 'static/js/[name].js', // 注意不是驼峰
-    // 统一配置chunk输入
+    // 统一配置chunk输出
     chunkFilename: 'static/js/[name].chunk.js',
     // 统一配置静态资源输出
     assetModuleFilename: 'static/images/[name]-[hash:10][ext][query]',
