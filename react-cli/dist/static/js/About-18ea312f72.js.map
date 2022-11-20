@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/About-18ea312f72.js","mappings":"mKACe,SAASA,IACpB,OAAQC,EAAAA,cAAoB,MAAO,KAAM,QAC7C,C","sources":["webpack://react-cli/./src/views/About.tsx"],"sourcesContent":["import React from 'react';\r\nexport default function About() {\r\n    return (React.createElement(\"div\", null, \"About\"));\r\n}\r\n"],"names":["About","React"],"sourceRoot":""}
