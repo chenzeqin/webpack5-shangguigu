@@ -3,24 +3,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { getStyleLoader } = require('./utils');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ReactRefreshTypeScript = require('react-refresh-typescript');
-// 资源压缩
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserWebpackPlugin = require('terser-webpack-plugin');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 /*
   对应5个概念
 */
-const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   entry: path.resolve(__dirname, '../src/main'),
   output: {
-    path: undefined,
-    filename: 'static/js/[name].js', // 注意不是驼峰
-    chunkFilename: 'static/js/[name].js',
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'static/js/[name]-[contenthash:10].js', // 注意不是驼峰
+    chunkFilename: 'static/js/[name]-[contenthash:10].js',
     // 统一配置静态资源输出
     assetModuleFilename: 'static/images/[name]-[hash:10][ext][query]',
+    clean: true,
   },
   module: {
     rules: [
@@ -71,13 +67,6 @@ module.exports = {
           },
           {
             loader: 'ts-loader',
-            // for HMR
-            options: {
-              getCustomTransformers: () => ({
-                before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
-              }),
-              transpileOnly: isDevelopment,
-            },
           },
         ],
       },
@@ -98,65 +87,32 @@ module.exports = {
       filename: 'static/[name].css', // 注意不是驼峰
       chunkFilename: 'static/[name].chunk.css',
     }),
-    // HMR
-    isDevelopment && new ReactRefreshWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../public'),
+          to: path.resolve(__dirname, '../dist'),
+          globOptions: {
+            dot: true,
+            gitignore: true,
+            ignore: ['**/index.html'],
+          },
+        },
+      ],
+    }),
   ].filter(Boolean),
-  mode: 'development',
-  devtool: 'cheap-module-source-map',
+  mode: 'production',
+  devtool: 'source-map',
   resolve: {
     // 自动补全文件扩展名
     extensions: ['.jsx', '.js', '.json', '.ts', '.tsx'],
   },
   optimization: {
-    minimizer: [
-      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
-      // `...`,
-      // css压缩
-      new CssMinimizerPlugin(),
-      // 生产模式会默认开启TerserPlugin，但是我们需要进行其他配置，需要自己写
-      new TerserWebpackPlugin(),
-      // 压缩图片,无损压缩配置为例：
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminGenerate,
-          options: {
-            plugins: [
-              ['gifsicle', { interlaced: true }],
-              ['jpegtran', { progressive: true }],
-              ['optipng', { optimizationLevel: 5 }],
-              [
-                'svgo',
-                {
-                  plugins: [
-                    'preset-default',
-                    'prefixIds',
-                    {
-                      name: 'sortAttrs',
-                      params: {
-                        xmlnsOrder: 'alphabetical',
-                      },
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
-        },
-      }),
-    ],
     splitChunks: {
       chunks: 'all',
     },
     runtimeChunk: {
       name: (entryPoint) => `runtime~${entryPoint.name}.js`,
     },
-  },
-  devServer: {
-    host: 'localhost',
-    port: 3002,
-    hot: true,
-    open: true,
-    // 解决history router 页面404问题
-    historyApiFallback: true,
   },
 };

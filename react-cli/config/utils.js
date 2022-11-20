@@ -2,10 +2,11 @@
  * @Author: chenzq
  * @Date: 2022-11-06 15:42:11
  * @Description: webpack config utils
- * @LastEditTime: 2022-11-06 15:53:15
+ * @LastEditTime: 2022-11-20 15:30:32
  * @LastEditors: chenzq
  */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   /**
@@ -15,7 +16,7 @@ module.exports = {
    */
   getStyleLoader(loaderName) {
     return [
-      MiniCssExtractPlugin.loader,
+      isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
       'css-loader',
       {
         loader: 'postcss-loader',
