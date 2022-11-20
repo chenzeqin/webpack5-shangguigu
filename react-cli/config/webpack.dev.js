@@ -3,9 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { getStyleLoader } = require('./utils');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshTypeScript = require('react-refresh-typescript');
 /*
   对应5个概念
 */
+const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   entry: path.resolve(__dirname, '../src/main'),
   output: {
@@ -62,7 +65,16 @@ module.exports = {
               // plugins: ['@babel/plugin-transform-runtime'], // 减少代码体积 react preset已经配置好了
             },
           },
-          'ts-loader',
+          {
+            loader: 'ts-loader',
+            // for HMR
+            options: {
+              getCustomTransformers: () => ({
+                before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
+              }),
+              transpileOnly: isDevelopment,
+            },
+          },
         ],
       },
     ],
@@ -82,7 +94,9 @@ module.exports = {
       filename: 'static/[name].css', // 注意不是驼峰
       chunkFilename: 'static/[name].chunk.css',
     }),
-  ],
+    // HMR
+    isDevelopment && new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean),
   mode: 'development',
   devtool: 'cheap-module-source-map',
   resolve: {
