@@ -2,7 +2,7 @@
  * @Author: chenzq
  * @Date: 2022-11-20 16:13:30
  * @Description: 把 webpack.dev.js 和 webpack.prod.js 合并为一个配置文件。
- * @LastEditTime: 2022-11-20 17:50:10
+ * @LastEditTime: 2022-11-20 18:37:09
  * @LastEditors: chenzq
  */
 const path = require('path');
@@ -108,6 +108,7 @@ module.exports = {
         filename: 'static/[name].css', // 注意不是驼峰
         chunkFilename: 'static/css/[name].chunk.css',
       }),
+      // 复制静态文件
     !isDevelopment &&
       new CopyPlugin({
         patterns: [
